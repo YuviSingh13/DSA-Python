@@ -1,0 +1,2 @@
+def repeatedNumber(A):
+    print()
