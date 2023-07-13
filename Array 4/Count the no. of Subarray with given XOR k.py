@@ -1,0 +1,55 @@
+from collections import defaultdict
+
+'''
+# Striver's Solution
+
+def subarraysWithXorK(a: [int], b: int) -> int:
+    n = len(a) # size of the given array.
+    xr = 0
+    mpp = defaultdict(int) # declaring the dictionary.
+    mpp[xr] = 1 # setting the value of 0.
+    cnt = 0
+
+    for i in range(n):
+        # prefix XOR till index i:
+        xr = xr ^ a[i]
+
+        # By formula: x = xr^k:
+        x = xr ^ k
+
+        # add the occurrence of xr^k
+        # to the count:
+        cnt += mpp[x]
+
+        # Insert the prefix xor till index i
+        # into the dictionary:
+        mpp[xr] += 1
+
+    return cnt
+'''
+
+
+# Interviewbit Solution
+def solve(A, B):
+    n = len(A)
+    xorr = 0
+    mpp = {xorr: 1}
+    count = 0
+    for i in range(n):
+        xorr = xorr ^ A[i]
+        x = xorr ^ B
+        if x in mpp.keys():
+            count += mpp[x]
+        if xorr in mpp.keys():
+            mpp[xorr] += 1
+        else:
+            mpp[xorr] = 1
+    print(mpp)
+    return count
+
+if __name__ == "__main__":
+    a = [4, 2, 2, 6, 4]
+    k = 6
+    # ans = subarraysWithXorK(a, k)
+    ans = solve(a, k)
+    print("The number of subarrays with XOR k is:", ans)
